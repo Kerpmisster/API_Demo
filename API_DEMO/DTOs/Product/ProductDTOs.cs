@@ -1,4 +1,7 @@
-﻿namespace API_DEMO.DTOs.Product
+﻿using API_DEMO.DTOs.Category;
+using API_DEMO.DTOs.OrderDetail;
+
+namespace API_DEMO.DTOs.Product
 {
     public class ProductDTOs
     {
@@ -23,5 +26,6 @@
         public string EditedBy { get; set; } = null!;
 
         public DateTime? EditedAt { get; set; }
+        public List<OrderDetailDTOs> OrderDetails { get; set; }
     }
 }

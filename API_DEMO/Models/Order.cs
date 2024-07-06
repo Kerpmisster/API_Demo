@@ -15,7 +15,7 @@ public partial class Order
 
     public string PaymentMethods { get; set; } = null!;
 
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     public virtual User? IdNavigation { get; set; }
 

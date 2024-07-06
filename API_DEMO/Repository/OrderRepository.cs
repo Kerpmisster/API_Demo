@@ -10,7 +10,7 @@ namespace API_DEMO.Repository
         {
             this.apiDemoContext = apiDemoContext;
         }
-        public Task<Order> CreateAsync(Order stocksModel)
+        public Task<Order> CreateAsync(Order ordersModel)
         {
             throw new NotImplementedException();
         }

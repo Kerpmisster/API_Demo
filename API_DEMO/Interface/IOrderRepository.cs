@@ -6,7 +6,7 @@ namespace API_DEMO.Interface
     {
         Task<List<Order>> GetAllAsync();
         Task<Order?> GetByIdAsync(int id);
-        Task<Order> CreateAsync(Order stocksModel);
+        Task<Order> CreateAsync(Order ordersModel);
         Task<Order?> UpdateAsync(int id, Order updateDto);
         Task<Order?> DeleteAsync(int id);
         Task<bool> OrderExists(int id);

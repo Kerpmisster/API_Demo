@@ -6,7 +6,7 @@ namespace API_DEMO.Interface
     {
         Task<List<User>> GetAllAsync();
         Task<User?> GetByIdAsync(int id);
-        Task<User> CreateAsync(User stocksModel);
+        Task<User> CreateAsync(User usersModel);
         Task<User?> UpdateAsync(int id, User updateDto);
         Task<User?> DeleteAsync(int id);
         Task<bool> UserExists(int id);

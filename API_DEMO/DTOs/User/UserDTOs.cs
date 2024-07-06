@@ -1,4 +1,6 @@
-﻿namespace API_DEMO.DTOs.User
+﻿using API_DEMO.DTOs.Order;
+
+namespace API_DEMO.DTOs.User
 {
     public class UserDTOs
     {
@@ -17,5 +19,6 @@
         public int? RoleId { get; set; }
 
         public string? AvatarImg { get; set; }
+        public List<OrderDTOs> Orders { get; set; }
     }
 }

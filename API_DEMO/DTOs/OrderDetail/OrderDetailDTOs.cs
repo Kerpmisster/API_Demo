@@ -1,4 +1,6 @@
-﻿namespace API_DEMO.DTOs.OrderDetail
+﻿using API_DEMO.DTOs.Product;
+
+namespace API_DEMO.DTOs.OrderDetail
 {
     public class OrderDetailDTOs
     {
@@ -13,5 +15,6 @@
         public decimal? Price { get; set; }
 
         public decimal? TotalAmount { get; set; }
+
     }
 }

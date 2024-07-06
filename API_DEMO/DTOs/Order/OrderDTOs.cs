@@ -1,4 +1,6 @@
-﻿namespace API_DEMO.DTOs.Order
+﻿using API_DEMO.DTOs.OrderDetail;
+
+namespace API_DEMO.DTOs.Order
 {
     public class OrderDTOs
     {
@@ -13,5 +15,6 @@
         public string PaymentMethods { get; set; } = null!;
 
         public DateTime CreatedAt { get; set; }
+        public List<OrderDetailDTOs> OrderDetails { get; set; }
     }
 }
