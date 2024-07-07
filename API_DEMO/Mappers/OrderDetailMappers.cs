@@ -19,13 +19,14 @@ namespace API_DEMO.Mappers
             };
         }
 
-        public static OrdersDetail ToOrderDetailCreateFromDTOs(this CreateOrderDetailDTOs orderDTOs)
+        public static OrdersDetail ToOrderDetailCreateFromDTOs(this CreateOrderDetailDTOs orderDTOs, int spId)
         {
             return new OrdersDetail
             {
+                SpId = spId,
                 Quantity = orderDTOs.Quantity,
                 Price = orderDTOs.Price,
-                TotalAmount = orderDTOs.TotalAmount
+                TotalAmount = orderDTOs.TotalAmount              
             };
         }
 

@@ -9,6 +9,6 @@ namespace API_DEMO.Interface
         Task<OrdersDetail> CreateAsync(OrdersDetail ordersDetailModel);
         Task<OrdersDetail?> UpdateAsync(int id, OrdersDetail ordersDetailModel);
         Task<OrdersDetail?> DeleteAsync(int id);
-
+        Task<bool> OrderDetailExists(int id);
     }
 }

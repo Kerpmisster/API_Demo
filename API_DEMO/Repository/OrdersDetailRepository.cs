@@ -1,41 +1,42 @@
 ﻿using API_DEMO.Interface;
 using API_DEMO.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace API_DEMO.Repository
 {
-    public class OrdersDetailRepository : IOrderRepository
+    public class OrdersDetailRepository : IOrdersDetailRepository
     {
         private readonly ApiDemoContext apiDemoContext;
         public OrdersDetailRepository(ApiDemoContext apiDemoContext)
         {
             this.apiDemoContext = apiDemoContext;
         }
-        public Task<Order> CreateAsync(Order ordersModel)
+        public Task<OrdersDetail> CreateAsync(OrdersDetail ordersDetailModel)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Order?> DeleteAsync(int id)
+        public Task<OrdersDetail?> DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Order>> GetAllAsync()
+        public async Task<List<OrdersDetail>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await apiDemoContext.OrdersDetails.ToListAsync();
         }
 
-        public Task<Order?> GetByIdAsync(int id)
+        public async Task<OrdersDetail?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await apiDemoContext.OrdersDetails.FirstOrDefaultAsync(o=>o.Id==id);
         }
 
-        public Task<bool> OrderExists(int id)
+        public async Task<bool> OrderDetailExists(int id)
         {
-            throw new NotImplementedException();
+            return await apiDemoContext.OrdersDetails.AnyAsync(o => o.Id == id);
         }
 
-        public Task<Order?> UpdateAsync(int id, Order updateDto)
+        public Task<OrdersDetail?> UpdateAsync(int id, OrdersDetail ordersDetailModel)
         {
             throw new NotImplementedException();
         }

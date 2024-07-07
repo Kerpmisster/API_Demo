@@ -19,10 +19,11 @@ namespace API_DEMO.Mappers
             };
         }
 
-        public static Order ToOrderCreateFromDTOs(this CreateOrderDTOs orderDTOs)
+        public static Order ToOrderCreateFromDTOs(this CreateOrderDTOs orderDTOs, int id)
         {
             return new Order
             {
+                Id = id,
                 Address = orderDTOs.Address,
                 AccountCode = orderDTOs.AccountCode,
                 PaymentMethods = orderDTOs.PaymentMethods

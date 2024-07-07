@@ -1,5 +1,6 @@
 ﻿using API_DEMO.Interface;
 using API_DEMO.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace API_DEMO.Repository
 {
@@ -20,19 +21,19 @@ namespace API_DEMO.Repository
             throw new NotImplementedException();
         }
 
-        public Task<List<Product>> GetAllAsync()
+        public async Task<List<Product>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await apiDemoContext.Products.Include(u => u.OrdersDetails).ToListAsync();
         }
 
-        public Task<Product?> GetByIdAsync(int id)
+        public async Task<Product?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await apiDemoContext.Products.Include(u => u.OrdersDetails).FirstOrDefaultAsync(p=>p.SpId==id);
         }
 
-        public Task<bool> ProductExists(int id)
+        public async Task<bool> ProductExists(int id)
         {
-            throw new NotImplementedException();
+            return await apiDemoContext.Products.AnyAsync(p => p.SpId == id);
         }
 
         public Task<Product?> UpdateAsync(int id, Product updateDto)

@@ -1,5 +1,6 @@
 ﻿using API_DEMO.Interface;
 using API_DEMO.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace API_DEMO.Repository
 {
@@ -20,19 +21,19 @@ namespace API_DEMO.Repository
             throw new NotImplementedException();
         }
 
-        public Task<List<Role>> GetAllAsync()
+        public async Task<List<Role>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await apiDemoContext.Roles.Include(u => u.Users).ToListAsync();
         }
 
-        public Task<Role?> GetByIdAsync(int id)
+        public async Task<Role?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await apiDemoContext.Roles.Include(u => u.Users).FirstOrDefaultAsync(r=>r.RoleId==id);
         }
 
-        public Task<bool> RoleExists(int id)
+        public async Task<bool> RoleExists(int id)
         {
-            throw new NotImplementedException();
+            return await apiDemoContext.Roles.AnyAsync(r => r.RoleId == id);
         }
 
         public Task<Role?> UpdateAsync(int id, Role updateDto)

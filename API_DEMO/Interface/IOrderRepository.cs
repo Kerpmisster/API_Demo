@@ -2,7 +2,7 @@
 
 namespace API_DEMO.Interface
 {
-    public interface IOrderRepository
+    public interface IOrdersRepository
     {
         Task<List<Order>> GetAllAsync();
         Task<Order?> GetByIdAsync(int id);

@@ -1,9 +1,10 @@
 ﻿using API_DEMO.Interface;
 using API_DEMO.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace API_DEMO.Repository
 {
-    public class OrderRepository : IOrderRepository
+    public class OrderRepository : IOrdersRepository
     {
         private readonly ApiDemoContext apiDemoContext;
         public OrderRepository(ApiDemoContext apiDemoContext)
@@ -20,19 +21,19 @@ namespace API_DEMO.Repository
             throw new NotImplementedException();
         }
 
-        public Task<List<Order>> GetAllAsync()
+        public async Task<List<Order>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await apiDemoContext.Orders.Include(u => u.OrdersDetails).ToListAsync();
         }
 
-        public Task<Order?> GetByIdAsync(int id)
+        public async Task<Order?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await apiDemoContext.Orders.Include(u => u.OrdersDetails).FirstOrDefaultAsync(o=>o.OrdersId==id);
         }
 
-        public Task<bool> OrderExists(int id)
+        public async Task<bool> OrderExists(int id)
         {
-            throw new NotImplementedException();
+            return await apiDemoContext.Orders.AnyAsync(o => o.OrdersId == id);
         }
 
         public Task<Order?> UpdateAsync(int id, Order updateDto)

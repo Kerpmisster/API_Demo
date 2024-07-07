@@ -1,5 +1,6 @@
 ﻿using API_DEMO.Interface;
 using API_DEMO.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace API_DEMO.Repository
 {
@@ -10,9 +11,9 @@ namespace API_DEMO.Repository
         {
             this.apiDemoContext = apiDemoContext;
         }
-        public Task<bool> CategoryExists(int id)
+        public async Task<bool> CategoryExists(int id)
         {
-            throw new NotImplementedException();
+            return await apiDemoContext.Categories.AnyAsync(c => c.CategoryId == id);
         }
 
         public Task<Category> CreateAsync(Category categoriesModel)
@@ -25,14 +26,14 @@ namespace API_DEMO.Repository
             throw new NotImplementedException();
         }
 
-        public Task<List<Category>> GetAllAsync()
+        public async Task<List<Category>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await apiDemoContext.Categories.Include(u => u.Products).ToListAsync();
         }
 
-        public Task<Category?> GetByIdAsync(int id)
+        public async Task<Category?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await apiDemoContext.Categories.Include(u => u.Products).FirstOrDefaultAsync(c=>c.CategoryId==id);
         }
 
         public Task<Category?> UpdateAsync(int id, Category categoriesModel)

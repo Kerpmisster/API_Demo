@@ -25,11 +25,12 @@ namespace API_DEMO.Mappers
             };
         }
 
-        public static Product ToProductCreateFromDTOs(this CreateProductDTOs productDTOs)
+        public static Product ToProductCreateFromDTOs(this CreateProductDTOs productDTOs, int categoryId)
         {
             return new Product
             { 
                 Name = productDTOs.Name,
+                CategoryId = categoryId,
                 Description = productDTOs.Description,
                 Quantity = productDTOs.Quantity,
                 Price = productDTOs.Price,

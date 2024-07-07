@@ -1,5 +1,6 @@
 ﻿using API_DEMO.Interface;
 using API_DEMO.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace API_DEMO.Repository
 {
@@ -20,14 +21,14 @@ namespace API_DEMO.Repository
             throw new NotImplementedException();
         }
 
-        public Task<List<User>> GetAllAsync()
+        public async Task<List<User>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await apiDemoContext.Users.Include(u=>u.Orders).ToListAsync();
         }
 
-        public Task<User?> GetByIdAsync(int id)
+        public async Task<User?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await apiDemoContext.Users.Include(u => u.Orders).FirstOrDefaultAsync(u=>u.Id==id);
         }
 
         public Task<User?> UpdateAsync(int id, User updateDto)
@@ -35,9 +36,9 @@ namespace API_DEMO.Repository
             throw new NotImplementedException();
         }
 
-        public Task<bool> UserExists(int id)
+        public async Task<bool> UserExists(int id)
         {
-            throw new NotImplementedException();
+            return await apiDemoContext.Users.AnyAsync(u=>u.Id==id);
         }
     }
 }
