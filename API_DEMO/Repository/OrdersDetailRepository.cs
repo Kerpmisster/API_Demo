@@ -11,14 +11,25 @@ namespace API_DEMO.Repository
         {
             this.apiDemoContext = apiDemoContext;
         }
-        public Task<OrdersDetail> CreateAsync(OrdersDetail ordersDetailModel)
+        public async Task<OrdersDetail> CreateAsync(OrdersDetail ordersDetailModel)
         {
-            throw new NotImplementedException();
+            await apiDemoContext.OrdersDetails.AddAsync(ordersDetailModel);
+            await apiDemoContext.SaveChangesAsync();
+            return ordersDetailModel;
         }
 
-        public Task<OrdersDetail?> DeleteAsync(int id)
+        public async Task<OrdersDetail?> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var ordersDetailModel = await apiDemoContext.OrdersDetails.FirstOrDefaultAsync(u => u.Id == id);
+
+            if (ordersDetailModel == null)
+            {
+                return null;
+            }
+
+            apiDemoContext.OrdersDetails.Remove(ordersDetailModel);
+            await apiDemoContext.SaveChangesAsync();
+            return ordersDetailModel;
         }
 
         public async Task<List<OrdersDetail>> GetAllAsync()
@@ -36,9 +47,22 @@ namespace API_DEMO.Repository
             return await apiDemoContext.OrdersDetails.AnyAsync(o => o.Id == id);
         }
 
-        public Task<OrdersDetail?> UpdateAsync(int id, OrdersDetail ordersDetailModel)
+        public async Task<OrdersDetail?> UpdateAsync(int id, OrdersDetail ordersDetailModel)
         {
-            throw new NotImplementedException();
+            var existingOrdersDetail = await apiDemoContext.OrdersDetails.FirstOrDefaultAsync(u => u.Id == id);
+
+            if (existingOrdersDetail == null)
+            {
+                return null;
+            }
+
+            existingOrdersDetail.Quantity = ordersDetailModel.Quantity;
+            existingOrdersDetail.Price = ordersDetailModel.Price;
+            existingOrdersDetail.TotalAmount    = ordersDetailModel.TotalAmount;
+
+            await apiDemoContext.SaveChangesAsync();
+
+            return existingOrdersDetail;
         }
     }
 }

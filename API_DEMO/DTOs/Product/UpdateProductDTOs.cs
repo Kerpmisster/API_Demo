@@ -12,5 +12,7 @@
         public string Image { get; set; } = null!;
 
         public string CreatedBy { get; set; } = null!;
+        public string EditedBy { get; set; } = null!;
+
     }
 }

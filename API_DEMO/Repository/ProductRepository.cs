@@ -11,14 +11,25 @@ namespace API_DEMO.Repository
         {
             this.apiDemoContext = apiDemoContext;
         }
-        public Task<Product> CreateAsync(Product productsModel)
+        public async Task<Product> CreateAsync(Product productsModel)
         {
-            throw new NotImplementedException();
+            await apiDemoContext.Products.AddAsync(productsModel);
+            await apiDemoContext.SaveChangesAsync();
+            return productsModel;
         }
 
-        public Task<Product?> DeleteAsync(int id)
+        public async Task<Product?> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var productsModel = await apiDemoContext.Products.FirstOrDefaultAsync(u => u.SpId == id);
+
+            if (productsModel == null)
+            {
+                return null;
+            }
+
+            apiDemoContext.Products.Remove(productsModel);
+            await apiDemoContext.SaveChangesAsync();
+            return productsModel;
         }
 
         public async Task<List<Product>> GetAllAsync()
@@ -36,9 +47,25 @@ namespace API_DEMO.Repository
             return await apiDemoContext.Products.AnyAsync(p => p.SpId == id);
         }
 
-        public Task<Product?> UpdateAsync(int id, Product updateDto)
+        public async Task<Product?> UpdateAsync(int id, Product updateDto)
         {
-            throw new NotImplementedException();
+            var existingProduct = await apiDemoContext.Products.FirstOrDefaultAsync(u => u.SpId == id);
+
+            if (existingProduct == null)
+            {
+                return null;
+            }
+
+            existingProduct.Name = updateDto.Name;
+            existingProduct.Description = updateDto.Description;
+            existingProduct.Quantity = updateDto.Quantity;
+            existingProduct.Price = updateDto.Price;
+            existingProduct.CreatedBy = updateDto.CreatedBy;
+            existingProduct.EditedBy = updateDto.EditedBy;
+
+            await apiDemoContext.SaveChangesAsync();
+
+            return existingProduct;
         }
     }
 }

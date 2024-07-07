@@ -26,6 +26,8 @@ namespace API_DEMO.Mappers
             {
                 Name = categoryDTOs.Name,
                 Description = categoryDTOs.Description,
+                CreatedBy = categoryDTOs.CreatedBy,
+                EditedBy= categoryDTOs.EditedBy
             };
         }
 
@@ -35,6 +37,8 @@ namespace API_DEMO.Mappers
             {
                 Name = categoryDTOs.Name,
                 Description = categoryDTOs.Description,
+                CreatedBy = categoryDTOs.CreatedBy,
+                EditedBy = categoryDTOs.EditedBy
             };
         }
     }

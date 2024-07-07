@@ -11,14 +11,25 @@ namespace API_DEMO.Repository
         {
             this.apiDemoContext = apiDemoContext;
         }
-        public Task<Order> CreateAsync(Order ordersModel)
+        public async Task<Order> CreateAsync(Order ordersModel)
         {
-            throw new NotImplementedException();
+            await apiDemoContext.Orders.AddAsync(ordersModel);
+            await apiDemoContext.SaveChangesAsync();
+            return ordersModel;
         }
 
-        public Task<Order?> DeleteAsync(int id)
+        public async Task<Order?> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var ordersModel = await apiDemoContext.Orders.FirstOrDefaultAsync(u => u.OrdersId == id);
+
+            if (ordersModel == null)
+            {
+                return null;
+            }
+
+            apiDemoContext.Orders.Remove(ordersModel);
+            await apiDemoContext.SaveChangesAsync();
+            return ordersModel;
         }
 
         public async Task<List<Order>> GetAllAsync()
@@ -36,9 +47,22 @@ namespace API_DEMO.Repository
             return await apiDemoContext.Orders.AnyAsync(o => o.OrdersId == id);
         }
 
-        public Task<Order?> UpdateAsync(int id, Order updateDto)
+        public async Task<Order?> UpdateAsync(int id, Order updateDto)
         {
-            throw new NotImplementedException();
+            var existingOrder = await apiDemoContext.Orders.FirstOrDefaultAsync(u => u.OrdersId == id);
+
+            if (existingOrder == null)
+            {
+                return null;
+            }
+
+            existingOrder.Address = updateDto.Address;
+            existingOrder.AccountCode = updateDto.AccountCode;
+            existingOrder.PaymentMethods = updateDto.PaymentMethods;
+
+            await apiDemoContext.SaveChangesAsync();
+
+            return existingOrder;
         }
     }
 }

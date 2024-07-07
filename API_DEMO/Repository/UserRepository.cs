@@ -11,14 +11,25 @@ namespace API_DEMO.Repository
         {
             this.apiDemoContext = apiDemoContext;
         }
-        public Task<User> CreateAsync(User usersModel)
+        public async Task<User> CreateAsync(User usersModel)
         {
-            throw new NotImplementedException();
+            await apiDemoContext.Users.AddAsync(usersModel);
+            await apiDemoContext.SaveChangesAsync();
+            return usersModel;
         }
 
-        public Task<User?> DeleteAsync(int id)
+        public async Task<User?> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var usersModel = await apiDemoContext.Users.FirstOrDefaultAsync(u=>u.Id==id);
+
+            if (usersModel == null) 
+            { 
+                return null;
+            }
+
+            apiDemoContext.Users.Remove(usersModel);
+            await apiDemoContext.SaveChangesAsync();
+            return usersModel;
         }
 
         public async Task<List<User>> GetAllAsync()
@@ -31,9 +42,22 @@ namespace API_DEMO.Repository
             return await apiDemoContext.Users.Include(u => u.Orders).FirstOrDefaultAsync(u=>u.Id==id);
         }
 
-        public Task<User?> UpdateAsync(int id, User updateDto)
+        public async Task<User?> UpdateAsync(int id, User updateDto)
         {
-            throw new NotImplementedException();
+            var existingUser = await apiDemoContext.Users.FirstOrDefaultAsync(u=>u.Id==id);
+
+            if (existingUser == null) 
+            {
+                return null ;
+            }
+
+            existingUser.Name = updateDto.Name;
+            existingUser.Email = updateDto.Email;
+            existingUser.Password = updateDto.Password;
+
+            await apiDemoContext.SaveChangesAsync();
+
+            return existingUser;
         }
 
         public async Task<bool> UserExists(int id)

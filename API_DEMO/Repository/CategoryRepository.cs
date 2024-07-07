@@ -16,14 +16,25 @@ namespace API_DEMO.Repository
             return await apiDemoContext.Categories.AnyAsync(c => c.CategoryId == id);
         }
 
-        public Task<Category> CreateAsync(Category categoriesModel)
+        public async Task<Category> CreateAsync(Category categoriesModel)
         {
-            throw new NotImplementedException();
+            await apiDemoContext.Categories.AddAsync(categoriesModel);
+            await apiDemoContext.SaveChangesAsync();
+            return categoriesModel; 
         }
 
-        public Task<Category?> DeleteAsync(int id)
+        public async Task<Category?> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var categoriesModel = await apiDemoContext.Categories.FirstOrDefaultAsync(u => u.CategoryId == id);
+
+            if (categoriesModel == null)
+            {
+                return null;
+            }
+
+            apiDemoContext.Categories.Remove(categoriesModel);
+            await apiDemoContext.SaveChangesAsync();
+            return categoriesModel; ;
         }
 
         public async Task<List<Category>> GetAllAsync()
@@ -36,9 +47,24 @@ namespace API_DEMO.Repository
             return await apiDemoContext.Categories.Include(u => u.Products).FirstOrDefaultAsync(c=>c.CategoryId==id);
         }
 
-        public Task<Category?> UpdateAsync(int id, Category categoriesModel)
+        public async Task<Category?> UpdateAsync(int id, Category categoriesModel)
         {
-            throw new NotImplementedException();
+            var existingCategory = await apiDemoContext.Categories.FirstOrDefaultAsync(u => u.CategoryId == id);
+
+            if (existingCategory == null)
+            {
+                return null;
+            }
+
+            existingCategory.Name = categoriesModel.Name;
+            existingCategory.Description = categoriesModel.Description;
+            existingCategory.CreatedBy = categoriesModel.CreatedBy;
+            existingCategory.EditedBy = categoriesModel.EditedBy;
+
+
+            await apiDemoContext.SaveChangesAsync();
+
+            return existingCategory;
         }
     }
 }

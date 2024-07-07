@@ -35,7 +35,8 @@ namespace API_DEMO.Mappers
                 Quantity = productDTOs.Quantity,
                 Price = productDTOs.Price,
                 Image = productDTOs.Image,
-                CreatedBy = productDTOs.CreatedBy
+                CreatedBy = productDTOs.CreatedBy,
+                EditedBy = productDTOs.EditedBy
             };
         }
 
@@ -49,6 +50,8 @@ namespace API_DEMO.Mappers
                 Price = productDTOs.Price,
                 Image = productDTOs.Image,
                 CreatedBy = productDTOs.CreatedBy
+                EditedBy = productDTOs.EditedBy
+
             };
         }
     }

@@ -11,14 +11,25 @@ namespace API_DEMO.Repository
         {
             this.apiDemoContext = apiDemoContext;
         }
-        public Task<Role> CreateAsync(Role roleModel)
+        public async Task<Role> CreateAsync(Role roleModel)
         {
-            throw new NotImplementedException();
+            await apiDemoContext.Roles.AddAsync(roleModel);
+            await apiDemoContext.SaveChangesAsync();
+            return roleModel; 
         }
 
-        public Task<Role?> DeleteAsync(int id)
+        public async Task<Role?> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var roleModel = await apiDemoContext.Roles.FirstOrDefaultAsync(u => u.RoleId == id);
+
+            if (roleModel == null)
+            {
+                return null;
+            }
+
+            apiDemoContext.Roles.Remove(roleModel);
+            await apiDemoContext.SaveChangesAsync();
+            return roleModel; 
         }
 
         public async Task<List<Role>> GetAllAsync()
@@ -36,9 +47,21 @@ namespace API_DEMO.Repository
             return await apiDemoContext.Roles.AnyAsync(r => r.RoleId == id);
         }
 
-        public Task<Role?> UpdateAsync(int id, Role updateDto)
+        public async Task<Role?> UpdateAsync(int id, Role updateDto)
         {
-            throw new NotImplementedException();
+            var existingRole = await apiDemoContext.Roles.FirstOrDefaultAsync(u => u.RoleId == id);
+
+            if (existingRole == null)
+            {
+                return null;
+            }
+
+            existingRole.Name = updateDto.Name;
+            existingRole.Description = updateDto.Description;
+
+            await apiDemoContext.SaveChangesAsync();
+
+            return existingRole; 
         }
     }
 }
