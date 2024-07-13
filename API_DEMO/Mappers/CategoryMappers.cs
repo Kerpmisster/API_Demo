@@ -20,7 +20,7 @@ namespace API_DEMO.Mappers
             };
         }
 
-        public static Category ToOrderCreateFromDTOs(this CreateCategoryDTOs categoryDTOs)
+        public static Category ToCategoryCreateFromDTOs(this CreateCategoryDTOs categoryDTOs)
         {
             return new Category
             {
@@ -31,7 +31,7 @@ namespace API_DEMO.Mappers
             };
         }
 
-        public static Category ToOrderUpdateFromDTOs(this UpdateCategoryDTOs categoryDTOs)
+        public static Category ToCategoryUpdateFromDTOs(this UpdateCategoryDTOs categoryDTOs)
         {
             return new Category
             {

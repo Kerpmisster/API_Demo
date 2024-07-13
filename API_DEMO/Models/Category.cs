@@ -13,7 +13,7 @@ public partial class Category
 
     public string CreatedBy { get; set; } = null!;
 
-    public DateTime? CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; } = DateTime.Now;
 
     public string EditedBy { get; set; } = null!;
 

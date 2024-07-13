@@ -20,7 +20,7 @@ namespace API_DEMO.Mappers
                 CreatedAt = productModel.CreatedAt,
                 EditedBy = productModel.EditedBy,
                 EditedAt = productModel.EditedAt,
-                OrderDetails = productModel.OrdersDetails.Select(e => e.ToOrderDetailFromDTOs()).ToList()
+                //OrderDetails = productModel.OrdersDetails.Select(e => e.ToOrderDetailFromDTOs()).ToList()
 
             };
         }
@@ -49,7 +49,7 @@ namespace API_DEMO.Mappers
                 Quantity = productDTOs.Quantity,
                 Price = productDTOs.Price,
                 Image = productDTOs.Image,
-                CreatedBy = productDTOs.CreatedBy
+                CreatedBy = productDTOs.CreatedBy,
                 EditedBy = productDTOs.EditedBy
 
             };

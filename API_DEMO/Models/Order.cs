@@ -11,9 +11,9 @@ public partial class Order
 
     public string? Address { get; set; }
 
-    public string AccountCode { get; set; } = null!;
+    public string AccountCode { get; set; } = null!; 
 
-    public string PaymentMethods { get; set; } = null!;
+    public string PaymentMethods { get; set; } = null!; 
 
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 

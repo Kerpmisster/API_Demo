@@ -9,7 +9,7 @@ public partial class Role
 
     public string Name { get; set; } = null!;
 
-    public DateTime? Created { get; set; }
+    public DateTime? Created { get; set; } = DateTime.Now;
 
     public string? Description { get; set; }
 

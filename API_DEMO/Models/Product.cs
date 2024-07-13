@@ -7,7 +7,7 @@ public partial class Product
 {
     public int SpId { get; set; }
 
-    public string Name { get; set; } = null!;
+    public string? Name { get; set; } 
 
     public int? CategoryId { get; set; }
 
@@ -24,7 +24,6 @@ public partial class Product
     public DateTime? CreatedAt { get; set; }
 
     public string EditedBy { get; set; } = null!;
-
     public DateTime? EditedAt { get; set; }
 
     public virtual Category? Category { get; set; }

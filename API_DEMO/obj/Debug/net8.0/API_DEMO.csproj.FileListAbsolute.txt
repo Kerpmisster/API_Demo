@@ -139,3 +139,4 @@ D:\Project 4\API_DEMO\API_DEMO\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.d
 D:\Project 4\API_DEMO\API_DEMO\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 D:\Project 4\API_DEMO\API_DEMO\bin\Debug\net8.0\Newtonsoft.Json.dll
 D:\Project 4\API_DEMO\API_DEMO\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
+D:\Project 4\API_DEMO\API_DEMO\bin\Debug\net8.0\API_DEMO.staticwebassets.runtime.json
